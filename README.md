@@ -25,4 +25,16 @@
 
 * Использование PostgreSQL.
 * docker-compose для запуска api и базы данных.
-* Swagger либо иная документация к апи.
+* Swagger либо иная документация к апи.  
+ 
+## Запуск проекта
+«pip install git  
+
+git clone https://github.com/drive-knight/test-drf  
+
+cd test-drf/  
+
+pip3 install -r requirenments.txt  
+
+python manage.py runserver
+`»
