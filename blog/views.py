@@ -10,19 +10,19 @@ from django.db.models import Q
 @api_view(['POST'])
 @permission_classes((permissions.AllowAny,))
 def create_article(request):
-    serializer_post = ArticleSerializer(data=request.data, context={'request': request})
-    if serializer_post.is_valid():
-        serializer_post.save()
-        return Response(serializer_post.data, status=status.HTTP_201_CREATED)
-    return Response(serializer_post.errors, status=status.HTTP_400_BAD_REQUEST)
+    serializer = ArticleSerializer(data=request.data, context={'request': request})
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET'])
 @permission_classes((permissions.AllowAny,))
 def list_article(request):
     arts = Article.objects.all()
-    serializer_get = ArticleSerializer(arts, many=True)
-    return Response(serializer_get.data)
+    serializer = ArticleSerializer(arts, many=True)
+    return Response(serializer.data)
 
 
 @api_view(['POST'])
@@ -30,7 +30,6 @@ def list_article(request):
 def create_comment(request):
     if request.method == 'POST':
         serializer = CommentSerializer(data=request.data)
-        print(request.data)
         if serializer.is_valid():
             serializer.save(parent=None)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -60,8 +59,8 @@ def reply_comment(request, pk):
 def list_comment(request):
     comms = Comment.objects.filter(post_id__in=[i['id'] for i in Article.objects.values('id')])\
         .values('id', 'name', 'body', 'email', 'parent', 'level')
-    serializer_get = CommentSerializer(comms, many=True)
-    return Response(serializer_get.data)
+    serializer = CommentSerializer(comms, many=True)
+    return Response(serializer.data)
 
 
 @api_view(['GET'])

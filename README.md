@@ -36,5 +36,4 @@ cd test-drf/
 
 pip3 install -r requirenments.txt  
 
-python manage.py runserver
-`»
+python manage.py runserver»
