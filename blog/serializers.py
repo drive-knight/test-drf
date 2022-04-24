@@ -10,8 +10,7 @@ class ArticleSerializer(serializers.ModelSerializer):
 
 class CommentSerializer(serializers.ModelSerializer):
     post = serializers.PrimaryKeyRelatedField(queryset=Article.objects.all(), required=False)
-    parent = serializers.PrimaryKeyRelatedField(allow_null=True, queryset=Comment.objects.all(), required=False,
-                                                source='parent.name')
+    parent = serializers.PrimaryKeyRelatedField(allow_null=True, queryset=Comment.objects.all(), required=False)
 
     class Meta:
         model = Comment
