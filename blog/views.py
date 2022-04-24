@@ -86,7 +86,7 @@ def list_comment_lvlthree(request, pk):
     return Response(content, status=status.HTTP_200_OK)"""
 
 
-@api_view()
+@api_view(['GET'])
 @permission_classes((permissions.AllowAny,))
 def list_comment_lvlthree(request, pk):
 
